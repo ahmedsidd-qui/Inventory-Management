@@ -18,6 +18,7 @@ A professional inventory management system built with PHP and MySQL for mattress
 - **Stock Management**: View all available items from owner's purchases
 - **Sales Recording**: Record sales with automatic stock validation and profit calculation
 - **Expense Management**: Track business expenses with categories
+- **Income Management**: Record other income sources
 - **Sales Search**: Search sales by specific date or date range
 
 ## 💻 Technology Stack
@@ -31,12 +32,14 @@ A professional inventory management system built with PHP and MySQL for mattress
 ## 📁 Project Structure
 
 ```
-/inv2
+/MattressInventory
 ├── config/              # Configuration files
 │   └── database.php     # Database connection
 ├── includes/            # Reusable PHP files
 │   ├── auth.php         # Authentication functions
-│   └── functions.php    # Utility functions
+│   ├── functions.php    # Utility functions
+│   ├── admin_nav.php    # Admin navigation
+│   └── owner_nav.php    # Owner navigation
 ├── assets/              # Static assets
 │   ├── css/
 │   │   └── style.css    # Professional styling
@@ -45,14 +48,18 @@ A professional inventory management system built with PHP and MySQL for mattress
 ├── owner/               # Owner panel pages
 │   ├── dashboard.php
 │   ├── purchase.php
+│   ├── edit_purchase.php
+│   ├── stock.php
+│   ├── search_sale.php
 │   └── pnl_report.php
 ├── admin/               # Admin panel pages
 │   ├── dashboard.php
 │   ├── stock.php
 │   ├── sale.php
 │   ├── expense.php
+│   ├── income.php
 │   └── search_sale.php
-├── install.php          # Database installer
+├── database.sql         # Database import file
 ├── login.php            # Unified login page
 ├── logout.php           # Logout handler
 └── index.php            # Landing page
@@ -69,17 +76,17 @@ A professional inventory management system built with PHP and MySQL for mattress
 
 1. **Copy Files**
    ```bash
-   # Copy the inv2 folder to your htdocs directory
-   cp -r inv2 /Applications/XAMPP/xamppfiles/htdocs/
+   # Copy the MattressInventory folder to your htdocs directory
+   cp -r MattressInventory /Applications/XAMPP/xamppfiles/htdocs/
    ```
 
-2. **Install Database**
-   - Navigate to: `http://localhost/inv2/install.php`
-   - The installer will create the `inventory` database and all tables
-   - Default users will be created automatically
+2. **Setup Database**
+   - Create a new database named `invent_form` in phpMyAdmin
+   - Import `database.sql` into the `invent_form` database
+   - This will create all necessary tables and default users
 
 3. **Login**
-   - Navigate to: `http://localhost/inv2/login.php`
+   - Navigate to: `http://localhost/MattressInventory/login.php`
    - Use default credentials (see below)
 
 ### Default Credentials
@@ -100,6 +107,7 @@ A professional inventory management system built with PHP and MySQL for mattress
 - **stock**: Current inventory with average purchase prices
 - **sales**: Sales transactions with profit tracking
 - **expenses**: Business expenses with categories
+- **other_income**: Revenue from other income sources
 
 ### Database Flow
 
@@ -154,7 +162,7 @@ Edit `config/database.php` to change database credentials:
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'inventory';
+$database = 'invent_form';
 ```
 
 ### Currency Format
